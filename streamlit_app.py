@@ -1,26 +1,16 @@
 import streamlit as st
 from transformers import pipeline
 
-# Load the text generation pipeline with a lightweight model
+# Initialize the text generation pipeline with a lightweight model
 text_generator = pipeline("text-generation", model="distilgpt2")
 
 # Streamlit app
-def main():
-    st.title("Hugging Face Text Generation")
-    st.write("Enter some text and let the model generate a continuation.")
+st.title("Lightweight Text Generation App")
 
-    # Text input
-    input_text = st.text_input("Enter your text here:")
+prompt = st.text_input("Enter a prompt for text generation:")
 
-    if st.button("Generate"):
-        if input_text:
-            # Generate text
-            generated_text = text_generator(input_text, max_length=50, num_return_sequences=1)
-            st.write("Generated Text:")
-            st.write(generated_text[0]['generated_text'])
-        else:
-            st.write("Please enter some text to generate.")
-
-if __name__ == "__main__":
-    main()
-
+if prompt:
+    with st.spinner('Generating text...'):
+        # Generate text with the lightweight model
+        generated_text = text_generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
+        st.write(generated_text)
