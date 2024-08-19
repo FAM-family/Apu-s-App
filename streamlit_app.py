@@ -1,8 +1,8 @@
 import streamlit as st
 from transformers import pipeline
 
-# Load the text generation pipeline
-text_generator = pipeline("text-generation", model="gpt2")
+# Load the text generation pipeline with a lightweight model
+text_generator = pipeline("text-generation", model="distilgpt2")
 
 # Streamlit app
 def main():
@@ -23,3 +23,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
